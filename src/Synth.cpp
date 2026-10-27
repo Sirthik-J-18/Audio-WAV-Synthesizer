@@ -6,19 +6,18 @@
 
 static std::unique_ptr<Oscillator> makeOscillator(const SynthSettings& s) {
     switch (s.waveform) {
-        case Waveform::Sine:
-            return std::make_unique<SineOscillator>(s.frequency, s.sampleRate);
         case Waveform::Square:
             return std::make_unique<SquareOscillator>(s.frequency, s.sampleRate);
         case Waveform::Sawtooth:
             return std::make_unique<SawtoothOscillator>(s.frequency, s.sampleRate);
+        case Waveform::Sine:
+        default:
+            return std::make_unique<SineOscillator>(s.frequency, s.sampleRate);
     }
-    return nullptr;
 }
 
 std::vector<double> render(const SynthSettings& s) {
-    const std::size_t total =
-        static_cast<std::size_t>(s.duration * s.sampleRate);
+    const std::size_t total = static_cast<std::size_t>(s.duration * s.sampleRate);
 
     std::unique_ptr<Oscillator> osc = makeOscillator(s);
     Envelope env(s.attack, s.decay, s.sustain, s.release, s.sampleRate);
@@ -27,7 +26,6 @@ std::vector<double> render(const SynthSettings& s) {
     samples.reserve(total);
 
     for (std::size_t i = 0; i < total; ++i) {
-        // TODO: sample = osc->nextSample() * env.amplitudeAt(i, total) * s.amplitude
         samples.push_back(osc->nextSample() * env.amplitudeAt(i, total) * s.amplitude);
     }
     return samples;

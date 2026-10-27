@@ -1,4 +1,5 @@
 #include "Oscillator.h"
+#include <cmath>
 
 Oscillator::Oscillator(double frequency, double sampleRate)
     : frequency_(frequency), sampleRate_(sampleRate) {}
@@ -12,6 +13,6 @@ void Oscillator::reset() {
 }
 
 void Oscillator::advancePhase() {
-    // TODO: phase_ += frequency_ / sampleRate_;
-    // TODO: wrap phase_ back into [0, 1)
+    phase_ += frequency_ / sampleRate_;
+    phase_ -= std::floor(phase_);
 }
