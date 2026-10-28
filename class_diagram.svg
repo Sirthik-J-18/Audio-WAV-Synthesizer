@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 950" width="100%" height="100%">
+  <defs>
+    <marker id="assoc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+    </marker>
+    <style>
+      .class-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: bold; font-size: 16.5px; fill: #0f172a; }
+      .stereotype { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: bold; font-size: 11.5px; fill: #334155; }
+      .mono-field { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 11.5px; fill: #1e293b; }
+      .italic-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-style: italic; font-size: 12px; fill: #64748b; }
+      .edge-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; font-weight: bold; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- ========================================================================= -->
+  <!-- 1. TOP ROW: ABSTRACT BASE CLASS (Oscillator) -->
+  <!-- ========================================================================= -->
+  <rect x="330" y="25" width="360" height="240" rx="6" ry="6" fill="#f8fafc" stroke="#1e293b" stroke-width="2" />
+  <text x="510" y="47" class="stereotype" text-anchor="middle">&laquo;abstract&raquo;</text>
+  <text x="510" y="70" class="class-title" font-size="18" text-anchor="middle">Oscillator</text>
+  <line x1="330" y1="82" x2="690" y2="82" stroke="#1e293b" stroke-width="1" />
+
+  <!-- Attributes -->
+  <text x="345" y="103" class="mono-field"># frequency_ : double</text>
+  <text x="345" y="123" class="mono-field"># sampleRate_ : double</text>
+  <text x="345" y="143" class="mono-field"># phase_ : double = 0.0</text>
+  <line x1="330" y1="155" x2="690" y2="155" stroke="#1e293b" stroke-width="1" />
+
+  <!-- Methods -->
+  <text x="345" y="174" class="mono-field">+ Oscillator(freq, sampleRate)</text>
+  <text x="345" y="194" class="mono-field">+ ~Oscillator()</text>
+  <text x="345" y="214" class="mono-field" font-style="italic">+ nextSample() : double = 0</text>
+  <text x="345" y="234" class="mono-field">+ setFrequency(freq) : void</text>
+  <text x="345" y="254" class="mono-field">+ reset() : void</text>
+
+  <!-- ========================================================================= -->
+  <!-- 2. INHERITANCE TREE (Open Triangle Bus Bar) -->
+  <!-- ========================================================================= -->
+  <!-- Open Triangle pointing to Oscillator base -->
+  <polygon points="510,265 501,283 519,283" fill="#ffffff" stroke="#1e293b" stroke-width="2" stroke-linejoin="round" />
+  <line x1="510" y1="283" x2="510" y2="310" stroke="#1e293b" stroke-width="2" />
+  <line x1="170" y1="310" x2="850" y2="310" stroke="#1e293b" stroke-width="2" />
+  <line x1="170" y1="310" x2="170" y2="345" stroke="#1e293b" stroke-width="2" />
+  <line x1="510" y1="310" x2="510" y2="345" stroke="#1e293b" stroke-width="2" />
+  <line x1="850" y1="310" x2="850" y2="345" stroke="#1e293b" stroke-width="2" />
+
+  <!-- ========================================================================= -->
+  <!-- 3. SECOND ROW: CONCRETE OSCILLATORS -->
+  <!-- ========================================================================= -->
+  <!-- SineOscillator -->
+  <rect x="45" y="345" width="250" height="110" rx="6" ry="6" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+  <text x="170" y="372" class="class-title" text-anchor="middle">SineOscillator</text>
+  <line x1="45" y1="384" x2="295" y2="384" stroke="#1e293b" stroke-width="1" />
+  <text x="170" y="404" class="italic-text" text-anchor="middle">(inherits state)</text>
+  <line x1="45" y1="416" x2="295" y2="416" stroke="#1e293b" stroke-width="1" />
+  <text x="60" y="438" class="mono-field">+ nextSample() : double</text>
+
+  <!-- SquareOscillator -->
+  <rect x="385" y="345" width="250" height="110" rx="6" ry="6" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+  <text x="510" y="372" class="class-title" text-anchor="middle">SquareOscillator</text>
+  <line x1="385" y1="384" x2="635" y2="384" stroke="#1e293b" stroke-width="1" />
+  <text x="510" y="404" class="italic-text" text-anchor="middle">(inherits state)</text>
+  <line x1="385" y1="416" x2="635" y2="416" stroke="#1e293b" stroke-width="1" />
+  <text x="400" y="438" class="mono-field">+ nextSample() : double</text>
+
+  <!-- SawtoothOscillator -->
+  <rect x="725" y="345" width="250" height="110" rx="6" ry="6" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+  <text x="850" y="372" class="class-title" text-anchor="middle">SawtoothOscillator</text>
+  <line x1="725" y1="384" x2="975" y2="384" stroke="#1e293b" stroke-width="1" />
+  <text x="850" y="404" class="italic-text" text-anchor="middle">(inherits state)</text>
+  <line x1="725" y1="416" x2="975" y2="416" stroke="#1e293b" stroke-width="1" />
+  <text x="740" y="438" class="mono-field">+ nextSample() : double</text>
+
+  <!-- ========================================================================= -->
+  <!-- 4. THIRD ROW: ENUMERATION WAVEFORM -->
+  <!-- ========================================================================= -->
+  <rect x="405" y="515" width="210" height="105" rx="6" ry="6" fill="#fef9c3" stroke="#d97706" stroke-width="2" />
+  <text x="510" y="534" class="stereotype" fill="#92400e" text-anchor="middle">&laquo;enumeration&raquo;</text>
+  <text x="510" y="555" class="class-title" fill="#92400e" text-anchor="middle">Waveform</text>
+  <line x1="405" y1="567" x2="615" y2="567" stroke="#d97706" stroke-width="1" />
+  <text x="510" y="583" class="mono-field" fill="#92400e" text-anchor="middle">Sine</text>
+  <text x="510" y="598" class="mono-field" fill="#92400e" text-anchor="middle">Square</text>
+  <text x="510" y="613" class="mono-field" fill="#92400e" text-anchor="middle">Sawtooth</text>
+
+  <!-- ========================================================================= -->
+  <!-- 5. FOURTH ROW: SynthSettings, Envelope, and WavWriter -->
+  <!-- ========================================================================= -->
+  <!-- SynthSettings -->
+  <rect x="35" y="680" width="270" height="235" rx="6" ry="6" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+  <text x="170" y="704" class="class-title" text-anchor="middle">SynthSettings</text>
+  <line x1="35" y1="718" x2="305" y2="718" stroke="#1e293b" stroke-width="1" />
+  <text x="48" y="734" class="mono-field">+ waveform : Waveform</text>
+  <text x="48" y="750" class="mono-field">+ frequency : double = 440.0</text>
+  <text x="48" y="766" class="mono-field">+ duration : double = 2.0</text>
+  <text x="48" y="782" class="mono-field">+ amplitude : double = 0.5</text>
+  <text x="48" y="798" class="mono-field">+ sampleRate : int = 44100</text>
+  <text x="48" y="814" class="mono-field">+ attack : double = 0.05</text>
+  <text x="48" y="830" class="mono-field">+ decay : double = 0.10</text>
+  <text x="48" y="846" class="mono-field">+ sustain : double = 0.70</text>
+  <text x="48" y="862" class="mono-field">+ release : double = 0.20</text>
+  <line x1="35" y1="875" x2="305" y2="875" stroke="#1e293b" stroke-width="1" />
+  <text x="170" y="894" class="italic-text" text-anchor="middle">POD Configuration</text>
+
+  <!-- Envelope -->
+  <rect x="380" y="680" width="260" height="215" rx="6" ry="6" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+  <text x="510" y="704" class="class-title" text-anchor="middle">Envelope</text>
+  <line x1="380" y1="718" x2="640" y2="718" stroke="#1e293b" stroke-width="1" />
+  <text x="395" y="736" class="mono-field">- attack_ : double</text>
+  <text x="395" y="753" class="mono-field">- decay_ : double</text>
+  <text x="395" y="770" class="mono-field">- sustain_ : double</text>
+  <text x="395" y="787" class="mono-field">- release_ : double</text>
+  <text x="395" y="804" class="mono-field">- sampleRate_ : double</text>
+  <line x1="380" y1="820" x2="640" y2="820" stroke="#1e293b" stroke-width="1" />
+  <text x="395" y="840" class="mono-field">+ Envelope(a, d, s, r, rate)</text>
+  <text x="395" y="862" class="mono-field">+ amplitudeAt(i, N) : double</text>
+
+  <!-- WavWriter -->
+  <rect x="715" y="680" width="270" height="185" rx="6" ry="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" />
+  <text x="850" y="704" class="class-title" fill="#14532d" text-anchor="middle">WavWriter</text>
+  <line x1="715" y1="718" x2="985" y2="718" stroke="#16a34a" stroke-width="1" />
+  <text x="850" y="734" class="italic-text" fill="#14532d" text-anchor="middle">&laquo;utility&raquo; (static methods)</text>
+  <line x1="715" y1="744" x2="985" y2="744" stroke="#16a34a" stroke-width="1" />
+  <text x="730" y="765" class="mono-field">+ write(file, smp, rate) : bool</text>
+  <text x="730" y="784" class="mono-field">- toInt16(sample) : int16_t</text>
+  <text x="730" y="803" class="mono-field">- writeU16(out, val) : void</text>
+  <text x="730" y="822" class="mono-field">- writeU32(out, val) : void</text>
+
+  <!-- ========================================================================= -->
+  <!-- 6. CONNECTORS & RELATIONSHIPS -->
+  <!-- ========================================================================= -->
+  <!-- SynthSettings -> Waveform (Stepped Orthogonal Arrow) -->
+  <path d="M 210 680 L 210 568 L 405 568" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#assoc-arrow)" />
+  <text x="305" y="552" class="edge-label" text-anchor="middle">uses</text>
+
+  <!-- SynthSettings -> Envelope (Dashed Dependency) -->
+  <line x1="305" y1="775" x2="380" y2="775" stroke="#1e293b" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#assoc-arrow)" />
+  <text x="342" y="752" class="edge-label" text-anchor="middle">modulates</text>
+
+  <!-- Envelope -> WavWriter (Dashed Dependency) -->
+  <line x1="640" y1="775" x2="715" y2="775" stroke="#1e293b" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#assoc-arrow)" />
+  <text x="677" y="752" class="edge-label" text-anchor="middle">audio buffer</text>
+
+</svg>
