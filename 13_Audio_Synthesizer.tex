@@ -134,6 +134,42 @@ The project delivers an end-to-end audio rendering pipeline partitioned into a s
     \end{itemize}
 \end{itemize}
 
+% ---------------------------------------------------------------------
+% 2.1 TECHNOLOGY STACK
+% ---------------------------------------------------------------------
+\subsection{Technology Stack}
+The system is engineered from the ground up utilizing modern, standardized technologies designed to achieve high computational throughput, platform independence, deterministic memory management, and zero third-party runtime dependencies for core signal synthesis. Table~\ref{tab:tech_stack} provides a comprehensive overview of the technologies, tools, and libraries utilized across the engineering lifecycle.
+
+\begin{table}[htbp]
+\centering
+\caption{Comprehensive Technology Stack of the Audio-WAV-Synthesizer Project}
+\label{tab:tech_stack}
+\scriptsize
+\begin{tabular}{@{}llllp{6.6cm}@{}}
+\toprule
+\textbf{Layer / Domain} & \textbf{Technology / Library} & \textbf{Standard / Version} & \textbf{License} & \textbf{Role and Architectural Rationale} \\ \midrule
+\textbf{Primary Language} & Modern C++ & ISO/IEC C++17 & Open ISO & Deterministic memory management (RAII), zero-overhead abstractions, compile-time type safety, and direct byte-level binary streaming. \\
+\textbf{DSP \& Core Logic} & C++ Standard Library & C++17 STL & ISO & \texttt{<memory>} (smart pointers), \texttt{<vector>} (contiguous sample buffers), \texttt{<cmath>} (trigonometrics), \texttt{<algorithm>} (\texttt{std::clamp}), \texttt{<cstdint>} (fixed-width integer types). \\
+\textbf{Binary File I/O} & \texttt{std::ofstream} & C++ Standard Stream & ISO & Unbuffered raw binary file output with manual little-endian byte serialization, avoiding compiler struct padding quirks. \\
+\textbf{Build Automation} & CMake & Version 3.14+ & BSD 3-Clause & Declarative target-based build orchestration; partitions the engine into a static library (\texttt{synth\_core}) and dual frontend binaries. \\
+\textbf{TUI Interface} & FTXUI & Version 5.0.0 & MIT & Declarative functional terminal UI providing interactive parameter sliders, responsive layout, and keyboard-driven controls. \\
+\textbf{Waveform Preview} & \texttt{ftxui::Canvas} & FTXUI Component & MIT & High-resolution oscilloscopic visualizer rendering continuous waveforms and ADSR curves using Unicode Braille dot matrices. \\
+\textbf{Dependency Fetch} & CMake \texttt{FetchContent} & CMake Built-in & BSD 3-Clause & Automated remote fetching and hermetic building of external dependencies directly from GitHub repositories during configuration. \\
+\textbf{Audio Format} & Microsoft RIFF/WAVE & Canonical 1991 Spec & Open Spec & Uncompressed 16-bit linear PCM audio container with 44-byte standard header, ensuring universal playback across all DAWs and OS players. \\
+\textbf{Compiler Support} & GCC, Clang, MSVC & Modern Toolchains & Various & Cross-platform compilation enforcing rigorous compiler diagnostics (\texttt{-Wall -Wextra}) and platform-independent little-endian bit shifting. \\
+\textbf{Verification Tools} & Audacity \& Hex Dumps & v3.x / Native CLI & GPL v2 / OS & Fast Fourier Transform (FFT) spectrum analysis, acoustic envelope inspection, and byte-level hexadecimal verification of WAV headers. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The technical justification for each principal component of the technology stack comprises:
+\begin{enumerate}
+    \item \textbf{C++17 for Deterministic Real-Time DSP:} Digital sound synthesis requires continuous, jitter-free sample computation. High-level garbage-collected runtimes (e.g., Java, Python, or JavaScript) introduce non-deterministic stop-the-world pauses that can compromise real-time audio streams. C++17 was selected for its zero-cost abstraction guarantees, compile-time polymorphic safety, and deterministic Resource Acquisition Is Initialization (RAII) memory semantics via \texttt{std::unique\_ptr}.
+    \item \textbf{Decoupled Modular Build via CMake 3.14+:} The project establishes a modular CMake architecture that isolates the core DSP algorithms into a standalone static library (\texttt{synth\_core}). This static library is compiled with strict warning diagnostics (\texttt{-Wall -Wextra}) and linked independently into both the lightweight CLI executable (\texttt{synth}) and the terminal UI executable (\texttt{synth-tui}).
+    \item \textbf{Reactive Terminal Interface via FTXUI:} To provide visual feedback without the runtime overhead of heavy graphical toolkits (such as Qt or wxWidgets), the project leverages Arthur Sonzogni's FTXUI library. FTXUI provides a functional reactive component model and utilizes Unicode Braille characters ($2 \times 4$ dot matrix per glyph cell) through \texttt{ftxui::Canvas}, delivering high-resolution oscilloscope displays directly within standard terminal windows.
+    \item \textbf{Zero-Runtime RIFF/WAVE Binary Serialization:} By directly assembling the 44-byte canonical RIFF/WAVE header and packing 16-bit little-endian integer samples via raw bit-shifting into \texttt{std::ofstream}, the system eliminates runtime dependencies on heavy third-party audio abstraction libraries (such as SDL2, PortAudio, or libsndfile). This guarantees complete architectural transparency, negligible binary footprint, and instant execution.
+\end{enumerate}
+
 % =====================================================================
 % 3. OBJECT-ORIENTED ARCHITECTURE
 % =====================================================================
