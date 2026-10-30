@@ -17,7 +17,7 @@ An audio WAV synthesizer generates sound digitally and outputs it into the stand
 ## System Architecture
 The application is structured into a decoupled three-tier architecture:
 
-![System Architecture](architecture_diagram.png)
+![System Architecture](files/architecture_diagram.png)
 
 1. **User Interface Layer (Executables):**
    - **CLI Frontend (`synth`):** Scriptable CLI parsing flags (`--freq`, `--wave`, `--adsr`, etc.), enforcing range validations, and triggering synthesis.
@@ -36,4 +36,4 @@ The application is structured into a decoupled three-tier architecture:
 ---
 
 ## UML Class Diagram
-![UML Class Diagram](class_diagram.png)
+![UML Class Diagram](files/class_diagram.png)
